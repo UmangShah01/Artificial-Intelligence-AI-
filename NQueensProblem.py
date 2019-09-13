@@ -1,0 +1,114 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "NQueensProblem.ipynb",
+      "version": "0.3.2",
+      "provenance": [],
+      "collapsed_sections": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/UmangShah01/Artificial-Intelligence-AI-/blob/master/NQueensProblem.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8KAuOX6N1Ac0",
+        "colab_type": "text"
+      },
+      "source": [
+        "***Program To Solve N Queens Problem***"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3Fnxes6R6rJJ",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "class NQueens:\n",
+        "    \"\"\"Generate all valid solutions for the n queens puzzle\"\"\"\n",
+        "    def __init__(self, size):\n",
+        "        # Store the puzzle (problem) size and the number of valid solutions\n",
+        "        self.size = size\n",
+        "        self.solutions = 0\n",
+        "        self.solve()\n",
+        "\n",
+        "    def solve(self):\n",
+        "        \"\"\"Solve the n queens puzzle and print the number of solutions\"\"\"\n",
+        "        positions = [-1] * self.size\n",
+        "        self.put_queen(positions, 0)\n",
+        "        print(\"Found\", self.solutions, \"solutions.\")\n",
+        " \n",
+        "    def put_queen(self, positions, target_row):\n",
+        "        \"\"\"\n",
+        "         Try to place a queen on target_row by checking all N possible cases.\n",
+        "         If a valid place is found the function calls itself trying to place a queen\n",
+        "         on the next row until all N queens are placed on the NxN board.\n",
+        "        \"\"\"\n",
+        "        # Base (stop) case - all N rows are occupied\n",
+        "        if target_row == self.size:\n",
+        "            self.show_full_board(positions)\n",
+        "            self.solutions += 1\n",
+        "        else:\n",
+        "            # For all N columns positions try to place a queen\t\n",
+        "            for column in range(self.size):\n",
+        "                # Reject all invalid positions\n",
+        "                if self.check_place(positions, target_row, column):\n",
+        "                    positions[target_row] = column\n",
+        "                    self.put_queen(positions, target_row + 1)\n",
+        " \n",
+        "    def check_place(self, positions, ocuppied_rows, column):\n",
+        "        \"\"\"\n",
+        "        Check if a given position is under attack from any of\n",
+        "        the previously placed queens (check column and diagonal positions)38         \"\"\"\n",
+        "        for i in range(ocuppied_rows):\n",
+        "            if positions[i] == column or \\\n",
+        "                positions[i] - i == column - ocuppied_rows or \\\n",
+        "                positions[i] + i == column + ocuppied_rows:\n",
+        " \n",
+        "                return False\n",
+        "        return True\n",
+        " \n",
+        "    def show_full_board(self, positions):\n",
+        "        \"\"\"Show the full NxN board\"\"\"\n",
+        "        for row in range(self.size):\n",
+        "            line = \"\"\n",
+        "            for column in range(self.size):\n",
+        "                if positions[row] == column:\n",
+        "                    line += \"Q \"\n",
+        "                else:\n",
+        "                    line += \". \"\n",
+        "            print(line)\n",
+        "        print(\"\\n\")        \n",
+        " \n",
+        "def main():\n",
+        "    \"\"\"Initialize and solve the n queens puzzle\"\"\"\n",
+        "    NQueens(4)\n",
+        " \n",
+        "if __name__ == \"__main__\":\n",
+        "    # execute only if run as a script\n",
+        "    main()\n"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
