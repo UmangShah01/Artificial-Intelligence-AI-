@@ -26,16 +26,6 @@
       ]
     },
     {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "8KAuOX6N1Ac0",
-        "colab_type": "text"
-      },
-      "source": [
-        "***Program To Solve N Queens Problem***"
-      ]
-    },
-    {
       "cell_type": "code",
       "metadata": {
         "id": "3Fnxes6R6rJJ",
